@@ -1,21 +1,21 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { connect } from "react-redux"
-import TextAreaFieldGroup from "../common/TextAreaFieldGroup"
-import { addComment } from "../../actions/postActions"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import TextAreaFieldGroup from '../common/TextAreaFieldGroup'
+import { addComment } from '../../actions/postActions'
 
 class CommentForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      text: "",
-      error: ""
+      text: '',
+      error: ''
     }
   }
 
   componentWillReceiveProps(nextProps) {
     const { errors } = nextProps
-    errors.type === "ADD_COMMENT" && this.setState({ error: errors.text })
+    errors.type === 'ADD_COMMENT' && this.setState({ error: errors.text })
   }
 
   handleChange = e => {
@@ -34,7 +34,7 @@ class CommentForm extends Component {
       avatar: user.avatar
     }
     this.props.addComment(postId, newComment)
-    this.setState({ text: "" })
+    this.setState({ text: '' })
   }
 
   render() {

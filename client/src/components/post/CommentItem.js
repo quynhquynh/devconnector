@@ -1,14 +1,14 @@
-import React, { Component } from "react"
-import { connect } from "react-redux"
-import PropTypes from "prop-types"
-import { deleteComment, updateComment } from "../../actions/postActions"
-import TextFieldGroup from "../common/TextFieldGroup"
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import { deleteComment, updateComment } from '../../actions/postActions'
+import TextFieldGroup from '../common/TextFieldGroup'
 
 class CommentItem extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      textToUpdate: "",
+      textToUpdate: '',
       isEditing: false
     }
   }
@@ -42,7 +42,7 @@ class CommentItem extends Component {
     errors.text === undefined && this.setState({ isEditing: false })
     errors.text &&
       auth.user.id === comment.user &&
-      errors.type === "UPDATE_COMMENT" &&
+      errors.type === 'UPDATE_COMMENT' &&
       comment._id === errors.cmtId &&
       this.setState({ isEditing: true })
   }

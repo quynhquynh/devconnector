@@ -1,21 +1,21 @@
-import React, { PureComponent } from "react"
-import { connect } from "react-redux"
-import PropTypes from "prop-types"
-import classnames from "classnames"
-import { Link } from "react-router-dom"
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import classnames from 'classnames'
+import { Link } from 'react-router-dom'
 import {
   deletePost,
   addLike,
   removeLike,
   updatePost
-} from "../../actions/postActions"
-import TextFieldGroup from "../common/TextFieldGroup"
+} from '../../actions/postActions'
+import TextFieldGroup from '../common/TextFieldGroup'
 
 class PostItem extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      textToUpdate: "",
+      textToUpdate: '',
       isEditing: false
     }
   }
@@ -45,14 +45,11 @@ class PostItem extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { auth, post, errors } = nextProps
+    console.log(nextProps.post._id)
+    const { post, errors } = nextProps
     errors.text === undefined && this.setState({ isEditing: false })
-    if (
-      errors.text &&
-      auth.user.id === post.user &&
-      errors.postId === post._id
-    ) {
-      errors.type === "UPDATE_POST" && this.setState({ isEditing: true })
+    if (errors.text && errors.postId === post._id) {
+      errors.type === 'UPDATE_POST' && this.setState({ isEditing: true })
     }
   }
 
@@ -149,8 +146,8 @@ class PostItem extends PureComponent {
                   className="btn btn-light mr-1"
                 >
                   <i
-                    className={classnames("fas fa-thumbs-up", {
-                      "text-info": this.findUserLike(likes)
+                    className={classnames('fas fa-thumbs-up', {
+                      'text-info': this.findUserLike(likes)
                     })}
                   />
                   <span className="badge badge-light">{likes.length}</span>

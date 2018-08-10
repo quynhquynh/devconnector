@@ -1,18 +1,18 @@
-import axios from "axios"
-import { GET_ERRORS } from "./authActions"
+import axios from 'axios'
+import { GET_ERRORS } from './authActions'
 
-export const POST_LOADING = "POST_LOADING"
-export const GET_POSTS = "GET_POSTS"
-export const GET_POST = "GET_POST"
-export const ADD_POST = "ADD_POST"
-export const DELETE_POST = "DELETE_POST"
-export const CLEAR_ERRORS = "CLEAR_ERRORS"
-export const UPDATE_POST = "UPDATE_POST"
+export const POST_LOADING = 'POST_LOADING'
+export const GET_POSTS = 'GET_POSTS'
+export const GET_POST = 'GET_POST'
+export const ADD_POST = 'ADD_POST'
+export const DELETE_POST = 'DELETE_POST'
+export const CLEAR_ERRORS = 'CLEAR_ERRORS'
+export const UPDATE_POST = 'UPDATE_POST'
 
 export const addPost = (postData, cb) => dispatch => {
   dispatch(clearErrors())
   axios
-    .post("/api/posts", postData)
+    .post('/api/posts', postData)
     .then(res =>
       dispatch({
         type: ADD_POST,
@@ -35,7 +35,7 @@ export const addPost = (postData, cb) => dispatch => {
 export const getPosts = () => dispatch => {
   dispatch(setPostLoading())
   axios
-    .get("/api/posts")
+    .get('/api/posts')
     .then(res =>
       dispatch({
         type: GET_POSTS,
@@ -147,7 +147,7 @@ export const addComment = (postId, cmt) => dispatch => {
         type: GET_ERRORS,
         payload: {
           text: e.response.data.text,
-          type: "ADD_COMMENT"
+          type: 'ADD_COMMENT'
         }
       })
     )
@@ -168,7 +168,7 @@ export const updateComment = (postId, cmtId, updateCmt) => dispatch => {
         type: GET_ERRORS,
         payload: {
           text: e.response.data.text,
-          type: "UPDATE_COMMENT",
+          type: 'UPDATE_COMMENT',
           cmtId
         }
       })

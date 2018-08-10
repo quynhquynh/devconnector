@@ -1,15 +1,15 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { connect } from "react-redux"
-import TextAreaFieldGroup from "../common/TextAreaFieldGroup"
-import { addPost } from "../../actions/postActions"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import TextAreaFieldGroup from '../common/TextAreaFieldGroup'
+import { addPost } from '../../actions/postActions'
 
 class PostForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      text: "",
-      error: ""
+      text: '',
+      error: ''
     }
   }
 
@@ -29,8 +29,8 @@ class PostForm extends Component {
     }
     this.props.addPost(newPost, (text, type) =>
       this.setState({
-        text: "",
-        error: type === "ADD_POST" && text
+        text: '',
+        error: type === 'ADD_POST' && text
       })
     )
   }

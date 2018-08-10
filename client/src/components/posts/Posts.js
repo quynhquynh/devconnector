@@ -1,10 +1,10 @@
-import React, { Component } from "react"
-import { connect } from "react-redux"
-import Spinner from "../common/Spinner"
-import PropTypes from "prop-types"
-import PostForm from "./PostForm"
-import { getPosts } from "../../actions/postActions"
-import PostFeed from "./PostFeed"
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import Spinner from '../common/Spinner'
+import PropTypes from 'prop-types'
+import PostForm from './PostForm'
+import { getPosts } from '../../actions/postActions'
+import PostFeed from './PostFeed'
 
 class Posts extends Component {
   componentDidMount() {
