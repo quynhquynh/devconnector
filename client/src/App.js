@@ -25,6 +25,10 @@ import Profile from './components/profile/Profile'
 import NotFound from './components/not-found/NotFound'
 import Posts from './components/posts/Posts'
 import Post from './components/post/Post'
+import createSagaMiddleware from 'redux-saga'
+import { getPostsSaga } from './actions/postActions'
+
+const sagaMiddleware = createSagaMiddleware()
 
 const initialState = {}
 
@@ -32,11 +36,11 @@ const store = createStore(
   reducers,
   initialState,
   compose(
-    applyMiddleware(thunk),
+    applyMiddleware(sagaMiddleware, thunk),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 )
-
+sagaMiddleware.run(getPostsSaga)
 if (localStorage.jwtToken) {
   //set auth token header auth
   setAuthToken(localStorage.jwtToken)

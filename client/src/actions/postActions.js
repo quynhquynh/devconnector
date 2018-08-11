@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { GET_ERRORS } from './authActions'
-
+import { takeLatest, call, put } from 'redux-saga/effects'
 export const POST_LOADING = 'POST_LOADING'
 export const GET_POSTS = 'GET_POSTS'
 export const GET_POST = 'GET_POST'
@@ -32,22 +32,51 @@ export const addPost = (postData, cb) => dispatch => {
     })
 }
 
-export const getPosts = () => dispatch => {
-  dispatch(setPostLoading())
-  axios
-    .get('/api/posts')
-    .then(res =>
-      dispatch({
-        type: GET_POSTS,
-        payload: res.data
-      })
-    )
-    .catch(e =>
-      dispatch({
-        type: GET_POSTS,
-        payload: null
-      })
-    )
+// export const getPosts = () => dispatch => {
+//   dispatch(setPostLoading())
+//   axios
+//     .get('/api/posts')
+//     .then(res =>
+//       dispatch({
+//         type: GET_POSTS,
+//         payload: res.data
+//       })
+//     )
+//     .catch(e =>
+//       dispatch({
+//         type: GET_POSTS,
+//         payload: null
+//       })
+//     )
+// }
+
+export const GET_POSTS_REQUEST = 'GET_POSTS_REQUEST'
+export const getPosts = () => {
+  return {
+    type: GET_POSTS_REQUEST
+  }
+}
+export function* getPostsSaga() {
+  yield takeLatest(getPosts().type, getPostsAction)
+}
+const fetchPosts = () => {
+  return axios.get('/api/posts')
+}
+function* getPostsAction() {
+  yield put(setPostLoading())
+  try {
+    const response = yield call(fetchPosts)
+    const posts = response.data
+    yield put({
+      type: GET_POSTS,
+      payload: posts
+    })
+  } catch (e) {
+    yield put({
+      type: GET_POSTS,
+      payload: null
+    })
+  }
 }
 
 export const getPost = id => dispatch => {
