@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
-const Post = require('../../models/post');
+const Post = require('../../models/Post');
 const validatePostInput = require('../../validation/post');
 const Profile = require('../../models/Profile');
 
